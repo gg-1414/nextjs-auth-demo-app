@@ -1,7 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
+import firebase from '../lib/firebase'
+import { useAuthContext } from '../context/authContext'
 import styles from "../styles/pages/Signup.module.css"
 
 export default function Signup() {
+  const router = useRouter()
+  const { authUser, loading } = useAuthContext() 
+
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
@@ -9,9 +15,29 @@ export default function Signup() {
   const [passwordConfirmation, setPasswordConfirmation] = useState("")
   const [error, setError] = useState("")
 
+  const validateRegex = /^(?=.*[0-9])(?=.*[- ?!@#$%^&*\/\\])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9- ?!@#$%^&*\/\\]{8,30}$/
+
   async function onSubmit(e) {
     e.preventDefault()
 
+    if (password === passwordConfirmation) {
+      if (password.length < 8) {
+        setError('Password must contain at least eight characters.')
+      } else if (!validateRegex.test(password)) {
+        setError('Password must contain at least one uppercase/lowercase letter, number, and special character.')
+      } else {
+        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password)
+        const user = userCredential.user
+        await user.updateProfile({ displayName: `${firstName} ${lastName}` })
+        await router.push('/account')
+      }
+    } else {
+      setError('Passwords do not match.')
+    }
+  }
+
+  if (!loading && authUser) {
+    router.push('/account')
   }
 
   return (
