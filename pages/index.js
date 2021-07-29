@@ -20,12 +20,6 @@ export default function Home() {
           <code className={styles.code}>pages/index.js</code>
         </p>
 
-        <Link href="/signup">
-          <h1 className={styles.title}>
-            <a>Signup</a>
-          </h1>
-        </Link>
-
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h3>Documentation &rarr;</h3>
@@ -56,7 +50,13 @@ export default function Home() {
           </a>
         </div>
       </main>
-
+      
+      <Link href="/signup">
+        <h1 className={styles.title}>
+          <a>Signup</a>
+        </h1>
+      </Link>
+      
       <footer className={styles.footer}>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
