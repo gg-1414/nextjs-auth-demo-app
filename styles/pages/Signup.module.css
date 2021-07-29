@@ -1,0 +1,42 @@
+.title {
+  text-align: center;
+  margin-top: 60px;
+  text-transform: uppercase;
+}
+
+.form {
+  margin: 0 auto;
+  padding: 20px 20px 0;
+  max-width: 478px;
+}
+
+.form input {
+  width: 100%;
+  border-radius: 5px;
+  border: 2px solid black;
+  padding: 16px 20px;
+}
+
+.form_group {
+  margin-top: 20px;
+}
+
+.error {
+  font-size: 14px;
+  margin-top: 20px;
+  color: red;
+}
+
+.cta_block {
+  text-align: center;
+}
+
+.button {
+  margin-top: 60px;
+  width: auto;
+  font-size: 20px;
+  padding: 8px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
